@@ -1,41 +1,85 @@
+---
+import { getProjectPath, projects } from "../../data/projects";
+---
+
 <section id="projects" class="section projects">
-  <div class="container project-card card">
-    <div>
+  <div class="container">
+    <div class="section-heading">
       <p class="eyebrow">Projects</p>
-      <h2>Project stories are coming next.</h2>
+      <h2>Project stories from Las Vegas outdoor living work.</h2>
       <p>
-        The rebuild will add case studies and galleries for patio covers,
-        pavers, concrete, lighting, and full outdoor transformations.
+        See how Paradise Builders approaches patio covers, pavers, concrete,
+        lighting, landscape, and full outdoor transformations.
       </p>
     </div>
-    <a class="btn secondary" href="#contact">Start a Project</a>
+
+    <div class="project-grid">
+      {projects.map((project) => (
+        <article class="project-card card">
+          <div>
+            <p class="eyebrow">{project.projectType}</p>
+            <h3>{project.title}</h3>
+            <p>{project.summary}</p>
+          </div>
+          <a href={getProjectPath(project.slug)}>View project →</a>
+        </article>
+      ))}
+    </div>
+
+    <a class="btn secondary projects-link" href="/projects/">View All Projects</a>
   </div>
 </section>
 
 <style>
-  .projects h2 {
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+
+  .section-heading h2 {
     margin: 0;
     font-size: clamp(2rem, 4vw, 3.5rem);
     line-height: 1;
     letter-spacing: -0.04em;
   }
 
-  .projects p {
+  .section-heading p,
+  .project-card p {
     color: var(--color-muted);
   }
 
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1rem;
+  }
+
   .project-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .project-card h3 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .project-card a {
+    color: var(--color-brand-strong);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .projects-link {
+    margin-top: 1.5rem;
   }
 
   @media (max-width: 900px) {
-    .project-card {
-      align-items: flex-start;
-      flex-direction: column;
+    .project-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

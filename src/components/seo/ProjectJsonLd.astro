@@ -1,0 +1,53 @@
+---
+import { business } from "../../data/business";
+import { getProjectPath, type Project } from "../../data/projects";
+
+type Props = {
+  project: Project;
+};
+
+const { project } = Astro.props;
+const siteUrl = business.url.endsWith("/") ? business.url : `${business.url}/`;
+const projectUrl = new URL(getProjectPath(project.slug), siteUrl).toString();
+const imageUrl = project.heroImage
+  ? new URL(project.heroImage, siteUrl).toString()
+  : undefined;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: project.title,
+  description: project.summary,
+  url: projectUrl,
+  ...(project.location
+    ? {
+        locationCreated: {
+          "@type": "Place",
+          name: project.location,
+        },
+      }
+    : {}),
+  about: [
+    project.projectType,
+    ...project.services,
+  ].map((name) => ({
+    "@type": "Thing",
+    name,
+  })),
+  creator: {
+    "@type": "HomeAndConstructionBusiness",
+    name: business.name,
+    url: business.url,
+    telephone: business.phone,
+  },
+  provider: {
+    "@type": "HomeAndConstructionBusiness",
+    name: business.name,
+    url: business.url,
+    telephone: business.phone,
+  },
+  ...(imageUrl ? { image: imageUrl } : {}),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>

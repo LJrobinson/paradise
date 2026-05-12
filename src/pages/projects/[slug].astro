@@ -1,0 +1,384 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BreadcrumbJsonLd from "../../components/seo/BreadcrumbJsonLd.astro";
+import ProjectJsonLd from "../../components/seo/ProjectJsonLd.astro";
+import { business } from "../../data/business";
+import { getProjectPath, projects } from "../../data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const projectPath = getProjectPath(project.slug);
+const phoneHref = `tel:${business.phone.replaceAll("-", "")}`;
+const emailHref = `mailto:${business.email}`;
+const galleryItems = project.gallery?.length ? project.gallery : [undefined, undefined, undefined];
+---
+
+<BaseLayout
+  title={project.seoTitle}
+  description={project.seoDescription}
+  canonicalPath={projectPath}
+  image={project.heroImage}
+>
+  <ProjectJsonLd project={project} />
+  <BreadcrumbJsonLd
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Projects", path: "/projects/" },
+      { name: project.title, path: projectPath },
+    ]}
+  />
+
+  <section class="project-hero section">
+    <div class="container project-hero__grid">
+      <div>
+        <a class="back-link" href="/projects/">Back to projects</a>
+        <p class="eyebrow">{project.projectType}</p>
+        <h1>{project.title}</h1>
+        <p class="project-hero__lede">{project.summary}</p>
+      </div>
+
+      <aside class="project-hero__media card">
+        {project.heroImage ? (
+          <img src={project.heroImage} alt={`${project.title} completed project`} />
+        ) : (
+          <span>Project photos coming soon</span>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  <section class="project-details section" aria-label="Project details">
+    <div class="container detail-grid">
+      <div>
+        <span>Location</span>
+        <strong>{project.location}</strong>
+      </div>
+      <div>
+        <span>Project type</span>
+        <strong>{project.projectType}</strong>
+      </div>
+      <div>
+        <span>Services</span>
+        <strong>{project.services.join(" + ")}</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section project-overview">
+    <div class="container project-overview__grid">
+      <div>
+        <p class="eyebrow">Services involved</p>
+        <h2>Focused work, connected outdoor living details.</h2>
+        <div class="service-chip-list">
+          {project.services.map((service) => <span>{service}</span>)}
+        </div>
+      </div>
+
+      <article class="highlight-card card">
+        <p class="eyebrow">Project highlights</p>
+        <ul>
+          {project.highlights.map((highlight) => <li>{highlight}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section project-story">
+    <div class="container story-stack">
+      <article class="story-row">
+        <h2>Challenge</h2>
+        <p>{project.challenge}</p>
+      </article>
+      <article class="story-row">
+        <h2>Solution</h2>
+        <p>{project.solution}</p>
+      </article>
+      <article class="story-row">
+        <h2>Outcome</h2>
+        <p>{project.outcome}</p>
+      </article>
+    </div>
+  </section>
+
+  {project.testimonial && (
+    <section class="section testimonial-section">
+      <div class="container testimonial-card card">
+        <p class="eyebrow">Homeowner note</p>
+        <blockquote>{project.testimonial}</blockquote>
+      </div>
+    </section>
+  )}
+
+  <section class="section gallery-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Gallery</p>
+        <h2>Project photos and details.</h2>
+        <p>
+          Image fields are ready for real project photography. Until then, the
+          page keeps a clean placeholder area.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        {galleryItems.map((image) => (
+          <div class="gallery-item card">
+            {image ? (
+              <img src={image} alt={`${project.title} gallery image`} loading="lazy" />
+            ) : (
+              <span>Photo placeholder</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section project-cta">
+    <div class="container project-cta__inner card">
+      <div>
+        <p class="eyebrow">Start a project</p>
+        <h2>Planning something similar?</h2>
+        <p>
+          Call or email Paradise Builders Las Vegas to talk through patio
+          covers, concrete, pavers, lighting, landscape, or outdoor living work.
+        </p>
+      </div>
+      <div class="project-cta__actions">
+        <a class="btn" href={phoneHref}>Call {business.phone}</a>
+        <a class="btn secondary" href={emailHref}>Email Paradise Builders</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-hero {
+    padding-top: clamp(4rem, 9vw, 8rem);
+  }
+
+  .project-hero__grid,
+  .project-overview__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+    color: var(--color-brand-strong);
+    font-size: 0.95rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .project-hero h1 {
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  .project-hero__lede {
+    max-width: 46rem;
+    color: var(--color-muted);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
+
+  .project-hero__media,
+  .gallery-item {
+    display: grid;
+    min-height: 320px;
+    overflow: hidden;
+    place-items: center;
+    background: var(--color-surface-soft);
+    color: var(--color-muted);
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .project-hero__media img,
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-details {
+    padding-block: 0;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .detail-grid div {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+  }
+
+  .detail-grid span {
+    color: var(--color-brand-strong);
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .detail-grid strong {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .project-overview h2,
+  .project-story h2,
+  .gallery-section h2,
+  .project-cta h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .gallery-section p,
+  .highlight-card li,
+  .project-story p,
+  .project-cta p {
+    color: var(--color-muted);
+  }
+
+  .service-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .service-chip-list span {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  .highlight-card {
+    padding: 1.5rem;
+  }
+
+  .highlight-card ul {
+    margin-bottom: 0;
+    padding-left: 1.1rem;
+  }
+
+  .highlight-card li + li {
+    margin-top: 0.5rem;
+  }
+
+  .story-stack {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .story-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
+
+  .story-row h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .testimonial-card {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .testimonial-card blockquote {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+  }
+
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    min-height: 200px;
+  }
+
+  .project-cta {
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .project-cta__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .project-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 900px) {
+    .project-hero__grid,
+    .project-overview__grid,
+    .story-row {
+      grid-template-columns: 1fr;
+    }
+
+    .detail-grid,
+    .gallery-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-cta__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .project-cta__actions {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .project-hero h1 {
+      font-size: clamp(3rem, 16vw, 4.5rem);
+    }
+
+    .detail-grid,
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
