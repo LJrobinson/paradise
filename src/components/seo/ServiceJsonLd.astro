@@ -1,0 +1,30 @@
+---
+import { business } from "../../data/business";
+import { getServicePath, services } from "../../data/services";
+
+type Service = (typeof services)[number];
+
+type Props = {
+  service: Service;
+};
+
+const { service } = Astro.props;
+const siteUrl = business.url.endsWith("/") ? business.url : `${business.url}/`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: service.title,
+  description: service.description,
+  provider: {
+    "@type": "HomeAndConstructionBusiness",
+    name: business.name,
+    url: business.url,
+    telephone: business.phone,
+  },
+  areaServed: business.serviceAreas,
+  url: new URL(getServicePath(service.slug), siteUrl).toString(),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>

@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { business } from "../data/business";
 import SiteFooter from "../components/layout/SiteFooter.astro";
 import SiteHeader from "../components/layout/SiteHeader.astro";
+import LocalBusinessJsonLd from "../components/seo/LocalBusinessJsonLd.astro";
 import Seo from "../components/seo/Seo.astro";
 
 const {
@@ -27,6 +28,7 @@ const {
       image={image}
       noindex={noindex}
     />
+    <LocalBusinessJsonLd />
 
     <script is:inline>
       const storedTheme = localStorage.getItem("theme");

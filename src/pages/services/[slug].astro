@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BreadcrumbJsonLd from "../../components/seo/BreadcrumbJsonLd.astro";
+import ServiceJsonLd from "../../components/seo/ServiceJsonLd.astro";
 import { business } from "../../data/business";
 import { getServicePath, services } from "../../data/services";
 
@@ -14,13 +16,23 @@ const { service } = Astro.props;
 const relatedServices = services.filter((item) => item.slug !== service.slug);
 const phoneHref = `tel:${business.phone.replaceAll("-", "")}`;
 const emailHref = `mailto:${business.email}`;
+const servicePath = getServicePath(service.slug);
 ---
 
 <BaseLayout
   title={service.seoTitle}
   description={service.seoDescription}
-  canonicalPath={getServicePath(service.slug)}
+  canonicalPath={servicePath}
 >
+  <ServiceJsonLd service={service} />
+  <BreadcrumbJsonLd
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Services", path: "/#services" },
+      { name: service.title, path: servicePath },
+    ]}
+  />
+
   <section class="service-hero section">
     <div class="container service-hero__grid">
       <div>
