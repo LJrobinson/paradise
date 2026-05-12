@@ -1,8 +1,6 @@
 ---
 import { business } from "../../data/business";
-import { getServicePath, services } from "../../data/services";
-
-type Service = (typeof services)[number];
+import { getServicePath, type Service } from "../../data/services";
 
 type Props = {
   service: Service;

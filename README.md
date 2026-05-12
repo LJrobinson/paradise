@@ -66,6 +66,10 @@ Preview production build:
 npm run preview
 ```
 
+## Image Workflow
+
+Image folders and naming conventions are documented in [docs/image-workflow.md](docs/image-workflow.md). Use web-ready `webp` or `avif` files and avoid committing huge original phone images.
+
 ## Deployment
 
 Build output is generated in:

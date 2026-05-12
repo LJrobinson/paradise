@@ -1,5 +1,6 @@
 ---
 import { getServicePath, services } from "../../data/services";
+import ImagePlaceholder from "../ui/ImagePlaceholder.astro";
 ---
 
 <section id="services" class="section services">
@@ -16,8 +17,23 @@ import { getServicePath, services } from "../../data/services";
     <div class="service-grid">
       {services.map((service) => (
         <article class="service-card card">
-          <h3>{service.title}</h3>
-          <p>{service.shortDescription}</p>
+          <div class="service-card__media">
+            {service.cardImage ? (
+              <img
+                src={service.cardImage}
+                alt={`${service.title} service example`}
+                width="640"
+                height="420"
+                loading="lazy"
+              />
+            ) : (
+              <ImagePlaceholder label={`${service.title} image coming soon`} aspectRatio="16 / 10" />
+            )}
+          </div>
+          <div>
+            <h3>{service.title}</h3>
+            <p>{service.shortDescription}</p>
+          </div>
           <a href={getServicePath(service.slug)}>Learn more →</a>
         </article>
       ))}
@@ -50,11 +66,26 @@ import { getServicePath, services } from "../../data/services";
 
   .service-card {
     display: flex;
-    min-height: 240px;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1.5rem;
+    overflow: hidden;
     border-top: 4px solid color-mix(in srgb, var(--color-brand) 72%, var(--color-border));
+  }
+
+  .service-card__media {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .service-card__media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .service-card > div:not(.service-card__media),
+  .service-card > a {
+    margin-inline: 1.5rem;
   }
 
   .service-card h3 {
@@ -68,6 +99,7 @@ import { getServicePath, services } from "../../data/services";
   }
 
   .service-card a {
+    margin-bottom: 1.5rem;
     color: var(--color-brand-strong);
     font-weight: 900;
     text-decoration: none;

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BreadcrumbJsonLd from "../../components/seo/BreadcrumbJsonLd.astro";
+import ImagePlaceholder from "../../components/ui/ImagePlaceholder.astro";
 import { getProjectPath, projects } from "../../data/projects";
 ---
 
@@ -31,11 +32,17 @@ import { getProjectPath, projects } from "../../data/projects";
     <div class="container project-grid">
       {projects.map((project) => (
         <article class="project-card card">
-          <div class="project-media" aria-hidden="true">
+          <div class="project-media">
             {project.heroImage ? (
-              <img src={project.heroImage} alt="" loading="lazy" />
+              <img
+                src={project.heroImage}
+                alt={`${project.title} project preview`}
+                width="900"
+                height="560"
+                loading="lazy"
+              />
             ) : (
-              <span>Project photos coming soon</span>
+              <ImagePlaceholder label="Project photos coming soon" aspectRatio="16 / 10" />
             )}
           </div>
 

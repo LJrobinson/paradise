@@ -1,4 +1,27 @@
-export const services = [
+export type Service = {
+  title: string;
+  slug: string;
+  eyebrow: string;
+  shortDescription: string;
+  description: string;
+  seoTitle: string;
+  seoDescription: string;
+  ctaLabel: string;
+  heroImage?: string;
+  cardImage?: string;
+  highlights: string[];
+  idealFor: string[];
+  sections: {
+    heading: string;
+    body: string;
+  }[];
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+};
+
+export const services: Service[] = [
   {
     title: "Patio Covers",
     slug: "patio-covers-las-vegas",
@@ -11,6 +34,8 @@ export const services = [
     seoDescription:
       "Paradise Builders designs and builds patio covers for Las Vegas homes, with durable outdoor living upgrades suited for Southern Nevada.",
     ctaLabel: "Request an estimate",
+    heroImage: undefined,
+    cardImage: undefined,
     highlights: [
       "Shade planning for west-facing patios, pool areas, and hard-working backyard spaces",
       "Construction that accounts for Las Vegas sun, wind, and long outdoor seasons",
@@ -65,6 +90,8 @@ export const services = [
     seoDescription:
       "Paradise Builders installs pavers for patios, walkways, driveways, and outdoor living spaces across Las Vegas and Southern Nevada.",
     ctaLabel: "Request an estimate",
+    heroImage: undefined,
+    cardImage: undefined,
     highlights: [
       "Paver layouts planned for patios, paths, driveways, and backyard gathering areas",
       "Surface planning that considers drainage, edges, access, and daily foot traffic",
@@ -119,6 +146,8 @@ export const services = [
     seoDescription:
       "Paradise Builders provides concrete contractor services for patios, flatwork, and outdoor living upgrades in Las Vegas.",
     ctaLabel: "Request an estimate",
+    heroImage: undefined,
+    cardImage: undefined,
     highlights: [
       "Concrete planning for patios, flatwork, walkways, and outdoor living foundations",
       "Useful for projects that need durable surfaces and clean transitions",
@@ -173,6 +202,8 @@ export const services = [
     seoDescription:
       "Paradise Builders plans and installs outdoor lighting for Las Vegas patios, landscapes, and outdoor living spaces.",
     ctaLabel: "Request an estimate",
+    heroImage: undefined,
+    cardImage: undefined,
     highlights: [
       "Lighting plans for patios, walkways, landscape features, and outdoor living zones",
       "Improves evening comfort, visibility, and the finished feel of the backyard",
@@ -227,6 +258,8 @@ export const services = [
     seoDescription:
       "Paradise Builders creates landscape upgrades for Las Vegas homes, connecting planting, hardscape, lighting, and outdoor living details.",
     ctaLabel: "Request an estimate",
+    heroImage: undefined,
+    cardImage: undefined,
     highlights: [
       "Landscape planning built around Southern Nevada heat, sun, and maintenance needs",
       "Connects planting areas, rock, hardscape, lighting, shade, and usable outdoor space",
@@ -281,6 +314,8 @@ export const services = [
     seoDescription:
       "Paradise Builders designs and builds outdoor living upgrades for Las Vegas homes, including patios, pavers, concrete, lighting, and landscape work.",
     ctaLabel: "Request an estimate",
+    heroImage: undefined,
+    cardImage: undefined,
     highlights: [
       "Whole-backyard planning for shade, surfaces, lighting, landscape, and usable zones",
       "Useful when the project involves more than one trade or outdoor feature",
@@ -323,7 +358,7 @@ export const services = [
       },
     ],
   },
-] as const;
+];
 
 export function getServicePath(slug: string) {
   return `/services/${slug}/`;

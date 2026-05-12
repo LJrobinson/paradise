@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BreadcrumbJsonLd from "../../components/seo/BreadcrumbJsonLd.astro";
 import FaqJsonLd from "../../components/seo/FaqJsonLd.astro";
 import ServiceJsonLd from "../../components/seo/ServiceJsonLd.astro";
+import ImagePlaceholder from "../../components/ui/ImagePlaceholder.astro";
 import { business } from "../../data/business";
 import { getServicePath, services } from "../../data/services";
 
@@ -45,9 +46,23 @@ const servicePath = getServicePath(service.slug);
       </div>
 
       <aside class="service-hero__card card">
-        <p class="eyebrow">Paradise Builders Las Vegas</p>
-        <h2>{business.tagline}</h2>
-        <p>{business.description}</p>
+        <div class="service-hero__media">
+          {service.heroImage ? (
+            <img
+              src={service.heroImage}
+              alt={`${service.title} by Paradise Builders Las Vegas`}
+              width="900"
+              height="675"
+            />
+          ) : (
+            <ImagePlaceholder label={`${service.title} project image coming soon`} />
+          )}
+        </div>
+        <div class="service-hero__card-body">
+          <p class="eyebrow">Paradise Builders Las Vegas</p>
+          <h2>{business.tagline}</h2>
+          <p>{business.description}</p>
+        </div>
       </aside>
     </div>
   </section>
@@ -264,12 +279,11 @@ const servicePath = getServicePath(service.slug);
   .service-hero__card,
   .service-area-card,
   .license-card,
-    .detail-card,
-    .faq-card {
+  .detail-card,
+  .faq-card {
     padding: 1.5rem;
   }
 
-  .service-hero__card,
   .detail-card,
   .faq-card,
   .service-area-card,
@@ -285,7 +299,7 @@ const servicePath = getServicePath(service.slug);
   .license-section h2,
   .faq-section h2,
   .related-section h2,
-    .service-cta h2 {
+  .service-cta h2 {
     margin: 0;
     font-size: clamp(2rem, 4vw, 3.5rem);
     line-height: 1;
@@ -301,6 +315,26 @@ const servicePath = getServicePath(service.slug);
   .faq-section p,
   .service-cta p {
     color: var(--color-muted);
+  }
+
+  .service-hero__card {
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .service-hero__media {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .service-hero__media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .service-hero__card-body {
+    padding: 1.5rem;
   }
 
   .proof-row {

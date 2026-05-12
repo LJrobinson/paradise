@@ -27,6 +27,8 @@ export const projects: Project[] = [
     seoTitle: "Cooksey Patio Cover Project | Paradise Builders",
     seoDescription:
       "See the Cooksey Patio Cover Project from Paradise Builders Las Vegas, a patio cover case study focused on shade, comfort, and outdoor living.",
+    heroImage: undefined,
+    gallery: undefined,
     services: ["Patio Covers", "Concrete", "Outdoor Living"],
     highlights: [
       "Added practical shade for a sun-exposed backyard patio",
@@ -40,7 +42,7 @@ export const projects: Project[] = [
     outcome:
       "The finished project gave the homeowner a more comfortable outdoor area with stronger shade, better usability, and a patio space that feels more intentional for daily life in Southern Nevada.",
   },
-] as const;
+];
 
 export function getProjectPath(slug: string) {
   return `/projects/${slug}/`;

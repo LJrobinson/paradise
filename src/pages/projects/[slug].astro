@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BreadcrumbJsonLd from "../../components/seo/BreadcrumbJsonLd.astro";
 import ProjectJsonLd from "../../components/seo/ProjectJsonLd.astro";
+import ImagePlaceholder from "../../components/ui/ImagePlaceholder.astro";
 import { business } from "../../data/business";
 import { getProjectPath, projects } from "../../data/projects";
 
@@ -45,9 +46,14 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
       <aside class="project-hero__media card">
         {project.heroImage ? (
-          <img src={project.heroImage} alt={`${project.title} completed project`} />
+          <img
+            src={project.heroImage}
+            alt={`${project.title} completed project`}
+            width="900"
+            height="675"
+          />
         ) : (
-          <span>Project photos coming soon</span>
+          <ImagePlaceholder label={`${project.title} hero image coming soon`} />
         )}
       </aside>
     </div>
@@ -130,9 +136,15 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
         {galleryItems.map((image) => (
           <div class="gallery-item card">
             {image ? (
-              <img src={image} alt={`${project.title} gallery image`} loading="lazy" />
+              <img
+                src={image}
+                alt={`${project.title} gallery image`}
+                width="720"
+                height="540"
+                loading="lazy"
+              />
             ) : (
-              <span>Photo placeholder</span>
+              <ImagePlaceholder label="Gallery photo coming soon" aspectRatio="4 / 3" />
             )}
           </div>
         ))}
