@@ -1,17 +1,299 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { business } from "../data/business";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Paradise Builders Las Vegas"
+  description="Paradise Builders Las Vegas designs and builds patio covers, pavers, concrete, outdoor lighting, landscaping, and outdoor living spaces across Southern Nevada."
+>
+  <section class="hero section">
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <p class="eyebrow">Las Vegas outdoor living contractor</p>
+        <h1>Outdoor spaces built for desert heat, real homes, and long-term trust.</h1>
+        <p class="hero__lede">
+          {business.name} designs and builds patio covers, pavers, concrete,
+          lighting, landscaping, and backyard upgrades across Southern Nevada.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn" href={`tel:${business.phone.replaceAll("-", "")}`}>
+            Call {business.phone}
+          </a>
+          <a class="btn secondary" href="#services">View Services</a>
+        </div>
+
+        <div class="hero__proof" aria-label="Trust highlights">
+          <span>Est. {business.establishedYear}</span>
+          <span>Licensed</span>
+          <span>Bonded</span>
+          <span>Insured</span>
+        </div>
+      </div>
+
+      <aside class="hero__card card">
+        <p class="eyebrow">Built different</p>
+        <h2>Structural steel + concrete capability under one roof.</h2>
+        <p>
+          Paradise Builders brings C-14 steel reinforcing and C-5 concrete
+          contractor licensing into outdoor living projects where strength,
+          shade, and finish quality matter.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="services" class="section services">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Services</p>
+        <h2>One contractor for the backyard pieces that usually get scattered.</h2>
+        <p>
+          Patio covers, pavers, concrete, lighting, landscaping, and outdoor
+          living upgrades designed around Las Vegas homes.
+        </p>
+      </div>
+
+      <div class="service-grid">
+        {business.services.map((service) => (
+          <article class="service-card card">
+            <h3>{service}</h3>
+            <p>
+              Planning, construction, and finish work for {service.toLowerCase()}
+              projects across Southern Nevada.
+            </p>
+            <a href="#contact">Request an estimate →</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="trust" class="section trust">
+    <div class="container trust__grid">
+      <div>
+        <p class="eyebrow">Trust proof</p>
+        <h2>Licensed contractor details should not be hidden in mouse print.</h2>
+        <p>
+          Homeowners should be able to quickly understand who they are calling,
+          what the company is licensed to do, and why the work is suited for Las
+          Vegas conditions.
+        </p>
+      </div>
+
+      <div class="license-grid">
+        {business.licenses.map((license) => (
+          <article class="license-card card">
+            <span>License #{license.number}</span>
+            <h3>{license.classification}</h3>
+            <p>{license.label}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section projects">
+    <div class="container project-card card">
+      <div>
+        <p class="eyebrow">Projects</p>
+        <h2>Project stories are coming next.</h2>
+        <p>
+          The rebuild will add case studies and galleries for patio covers,
+          pavers, concrete, lighting, and full outdoor transformations.
+        </p>
+      </div>
+      <a class="btn secondary" href="#contact">Start a Project</a>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container contact__grid">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Ready to make the backyard less “Vegas frying pan”?</h2>
+        <p>
+          Call or email Paradise Builders Las Vegas to discuss patio covers,
+          pavers, concrete, outdoor lighting, landscaping, or outdoor living
+          upgrades.
+        </p>
+      </div>
+
+      <div class="contact-card card">
+        <h3>{business.name}</h3>
+        <p>
+          <a href={`tel:${business.phone.replaceAll("-", "")}`}>{business.phone}</a><br />
+          <a href={`mailto:${business.email}`}>{business.email}</a>
+        </p>
+        <p>
+          {business.address.street}<br />
+          {business.address.city}, {business.address.state} {business.address.zip}
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: clamp(4rem, 9vw, 8rem);
+  }
+
+  .hero__grid,
+  .trust__grid,
+  .contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .hero h1 {
+    max-width: 13ch;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  .hero__lede {
+    max-width: 42rem;
+    color: var(--color-muted);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero__proof span {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  .hero__card {
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .hero__card h2,
+  .section-heading h2,
+  .trust h2,
+  .projects h2,
+  .contact h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .hero__card p,
+  .section-heading p,
+  .trust p,
+  .projects p,
+  .contact p {
+    color: var(--color-muted);
+  }
+
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .service-card,
+  .license-card,
+  .contact-card {
+    padding: 1.5rem;
+  }
+
+  .service-card h3,
+  .license-card h3,
+  .contact-card h3 {
+    margin-top: 0;
+  }
+
+  .service-card p,
+  .license-card p,
+  .contact-card p {
+    color: var(--color-muted);
+  }
+
+  .service-card a {
+    color: var(--color-brand-strong);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .license-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .license-card span {
+    color: var(--color-brand-strong);
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .contact {
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  @media (max-width: 900px) {
+    .hero__grid,
+    .trust__grid,
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-card {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 16vw, 4.5rem);
+    }
+  }
+</style>
