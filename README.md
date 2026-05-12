@@ -74,6 +74,8 @@ Image folders and naming conventions are documented in [docs/image-workflow.md](
 
 Use the [launch checklist](docs/launch-checklist.md) before uploading the static build to cPanel.
 
+For manual hosting uploads, follow the [cPanel deployment guide](docs/cpanel-deployment.md).
+
 ## Deployment
 
 Build output is generated in:
