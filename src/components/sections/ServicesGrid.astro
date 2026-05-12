@@ -1,0 +1,83 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="services" class="section services">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Services</p>
+      <h2>One contractor for the backyard pieces that usually get scattered.</h2>
+      <p>
+        Patio covers, pavers, concrete, lighting, landscaping, and outdoor
+        living upgrades designed around Las Vegas homes.
+      </p>
+    </div>
+
+    <div class="service-grid">
+      {business.services.map((service) => (
+        <article class="service-card card">
+          <h3>{service}</h3>
+          <p>
+            Planning, construction, and finish work for {service.toLowerCase()}
+            projects across Southern Nevada.
+          </p>
+          <a href="#contact">Request an estimate →</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .section-heading p {
+    color: var(--color-muted);
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .service-card {
+    padding: 1.5rem;
+  }
+
+  .service-card h3 {
+    margin-top: 0;
+  }
+
+  .service-card p {
+    color: var(--color-muted);
+  }
+
+  .service-card a {
+    color: var(--color-brand-strong);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 620px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

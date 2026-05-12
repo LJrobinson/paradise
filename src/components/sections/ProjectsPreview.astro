@@ -1,0 +1,41 @@
+<section id="projects" class="section projects">
+  <div class="container project-card card">
+    <div>
+      <p class="eyebrow">Projects</p>
+      <h2>Project stories are coming next.</h2>
+      <p>
+        The rebuild will add case studies and galleries for patio covers,
+        pavers, concrete, lighting, and full outdoor transformations.
+      </p>
+    </div>
+    <a class="btn secondary" href="#contact">Start a Project</a>
+  </div>
+</section>
+
+<style>
+  .projects h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .projects p {
+    color: var(--color-muted);
+  }
+
+  .project-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  @media (max-width: 900px) {
+    .project-card {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

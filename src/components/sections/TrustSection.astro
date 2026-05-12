@@ -1,0 +1,78 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="trust" class="section trust">
+  <div class="container trust__grid">
+    <div>
+      <p class="eyebrow">Trust proof</p>
+      <h2>Licensed contractor details should not be hidden in mouse print.</h2>
+      <p>
+        Homeowners should be able to quickly understand who they are calling,
+        what the company is licensed to do, and why the work is suited for Las
+        Vegas conditions.
+      </p>
+    </div>
+
+    <div class="license-grid">
+      {business.licenses.map((license) => (
+        <article class="license-card card">
+          <span>License #{license.number}</span>
+          <h3>{license.classification}</h3>
+          <p>{license.label}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .trust h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .trust p {
+    color: var(--color-muted);
+  }
+
+  .license-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .license-card {
+    padding: 1.5rem;
+  }
+
+  .license-card h3 {
+    margin-top: 0;
+  }
+
+  .license-card p {
+    color: var(--color-muted);
+  }
+
+  .license-card span {
+    color: var(--color-brand-strong);
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 900px) {
+    .trust__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
