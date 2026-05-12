@@ -70,6 +70,10 @@ npm run preview
 
 Image folders and naming conventions are documented in [docs/image-workflow.md](docs/image-workflow.md). Use web-ready `webp` or `avif` files and avoid committing huge original phone images.
 
+## Launch / Deployment
+
+Use the [launch checklist](docs/launch-checklist.md) before uploading the static build to cPanel.
+
 ## Deployment
 
 Build output is generated in:
