@@ -1,7 +1,7 @@
 export const services = [
   {
     title: "Patio Covers",
-    slug: "patio-covers",
+    slug: "patio-covers-las-vegas",
     eyebrow: "Shade structures",
     shortDescription:
       "Planning, construction, and finish work for patio cover projects across Southern Nevada.",
@@ -14,7 +14,7 @@ export const services = [
   },
   {
     title: "Pavers",
-    slug: "pavers",
+    slug: "pavers-las-vegas",
     eyebrow: "Hardscape surfaces",
     shortDescription:
       "Planning, construction, and finish work for paver projects across Southern Nevada.",
@@ -27,7 +27,7 @@ export const services = [
   },
   {
     title: "Concrete",
-    slug: "concrete",
+    slug: "concrete-las-vegas",
     eyebrow: "Concrete work",
     shortDescription:
       "Planning, construction, and finish work for concrete projects across Southern Nevada.",
@@ -40,7 +40,7 @@ export const services = [
   },
   {
     title: "Outdoor Lighting",
-    slug: "outdoor-lighting",
+    slug: "outdoor-lighting-las-vegas",
     eyebrow: "Exterior lighting",
     shortDescription:
       "Planning, construction, and finish work for outdoor lighting projects across Southern Nevada.",
@@ -53,7 +53,7 @@ export const services = [
   },
   {
     title: "Landscape",
-    slug: "landscape",
+    slug: "landscape-las-vegas",
     eyebrow: "Landscape upgrades",
     shortDescription:
       "Planning, construction, and finish work for landscape projects across Southern Nevada.",
@@ -66,7 +66,7 @@ export const services = [
   },
   {
     title: "Outdoor Living",
-    slug: "outdoor-living",
+    slug: "outdoor-living-las-vegas",
     eyebrow: "Backyard upgrades",
     shortDescription:
       "Planning, construction, and finish work for outdoor living projects across Southern Nevada.",
@@ -78,3 +78,7 @@ export const services = [
     ctaLabel: "Request an estimate",
   },
 ] as const;
+
+export function getServicePath(slug: string) {
+  return `/services/${slug}/`;
+}

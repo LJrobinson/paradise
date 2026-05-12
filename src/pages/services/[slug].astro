@@ -1,0 +1,335 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { business } from "../../data/business";
+import { getServicePath, services } from "../../data/services";
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const relatedServices = services.filter((item) => item.slug !== service.slug);
+const phoneHref = `tel:${business.phone.replaceAll("-", "")}`;
+const emailHref = `mailto:${business.email}`;
+---
+
+<BaseLayout title={service.seoTitle} description={service.seoDescription}>
+  <section class="service-hero section">
+    <div class="container service-hero__grid">
+      <div>
+        <a class="back-link" href="/#services">Back to services</a>
+        <p class="eyebrow">{service.eyebrow}</p>
+        <h1>{service.title}</h1>
+        <p class="service-hero__lede">{service.description}</p>
+      </div>
+
+      <aside class="service-hero__card card">
+        <p class="eyebrow">Paradise Builders Las Vegas</p>
+        <h2>{business.tagline}</h2>
+        <p>{business.description}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="proof-row section" aria-label="Paradise Builders proof points">
+    <div class="container proof-row__grid">
+      <div>
+        <span>Est. {business.establishedYear}</span>
+        <strong>Local experience</strong>
+      </div>
+      <div>
+        <span>Licensed</span>
+        <strong>NV contractor details</strong>
+      </div>
+      <div>
+        <span>Bonded & insured</span>
+        <strong>Built for homeowner trust</strong>
+      </div>
+      <div>
+        <span>{business.address.city}, {business.address.state}</span>
+        <strong>Serving Southern Nevada</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section service-content">
+    <div class="container service-content__grid">
+      <div>
+        <p class="eyebrow">What we do</p>
+        <h2>{service.title} planned around the full backyard.</h2>
+      </div>
+      <div>
+        <p>{service.description}</p>
+        <p>
+          Paradise Builders keeps planning, construction, and finish work under
+          one contractor so the pieces of the outdoor living project are easier
+          to coordinate and built with the whole space in mind.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section vegas-section">
+    <div class="container vegas-section__grid">
+      <div>
+        <p class="eyebrow">Built for Las Vegas</p>
+        <h2>Outdoor upgrades need to make sense in desert heat.</h2>
+        <p>
+          Las Vegas homes need outdoor spaces that are practical, durable, and
+          comfortable enough to use. Paradise Builders plans each project around
+          shade, surfaces, structure, lighting, and long-term maintenance.
+        </p>
+      </div>
+      <div class="service-area-card card">
+        <h3>Service areas</h3>
+        <ul>
+          {business.serviceAreas.map((area) => <li>{area}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section license-section">
+    <div class="container license-section__grid">
+      <div>
+        <p class="eyebrow">License proof</p>
+        <h2>Clear contractor details before the first call.</h2>
+        <p>
+          Paradise Builders publishes license details so homeowners can quickly
+          understand the company behind the work.
+        </p>
+      </div>
+
+      <div class="license-grid">
+        {business.licenses.map((license) => (
+          <article class="license-card card">
+            <span>License #{license.number}</span>
+            <h3>{license.classification}</h3>
+            <p>{license.label}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section related-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Related services</p>
+        <h2>More outdoor living services from Paradise Builders.</h2>
+      </div>
+
+      <div class="related-grid">
+        {relatedServices.map((relatedService) => (
+          <a class="related-card card" href={getServicePath(relatedService.slug)}>
+            <span>{relatedService.eyebrow}</span>
+            <strong>{relatedService.title}</strong>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section service-cta">
+    <div class="container service-cta__inner card">
+      <div>
+        <p class="eyebrow">Start a project</p>
+        <h2>{service.ctaLabel} for {service.title.toLowerCase()}.</h2>
+        <p>
+          Call or email Paradise Builders Las Vegas to talk through the project,
+          the property, and the best next step.
+        </p>
+      </div>
+      <div class="service-cta__actions">
+        <a class="btn" href={phoneHref}>Call {business.phone}</a>
+        <a class="btn secondary" href={emailHref}>Email Paradise Builders</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .service-hero {
+    padding-top: clamp(4rem, 9vw, 8rem);
+  }
+
+  .service-hero__grid,
+  .service-content__grid,
+  .vegas-section__grid,
+  .license-section__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+    color: var(--color-brand-strong);
+    font-size: 0.95rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .service-hero h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  .service-hero__lede {
+    max-width: 46rem;
+    color: var(--color-muted);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
+
+  .service-hero__card,
+  .service-area-card,
+  .license-card {
+    padding: 1.5rem;
+  }
+
+  .service-hero__card h2,
+  .service-content h2,
+  .vegas-section h2,
+  .license-section h2,
+  .related-section h2,
+  .service-cta h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .service-hero__card p,
+  .service-content p,
+  .vegas-section p,
+  .license-section p,
+  .service-cta p {
+    color: var(--color-muted);
+  }
+
+  .proof-row {
+    padding-block: 0;
+  }
+
+  .proof-row__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .proof-row__grid div {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+  }
+
+  .proof-row span,
+  .related-card span,
+  .license-card span {
+    color: var(--color-brand-strong);
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .proof-row strong,
+  .related-card strong {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .service-area-card h3,
+  .license-card h3 {
+    margin-top: 0;
+  }
+
+  .service-area-card ul {
+    columns: 2;
+    margin-bottom: 0;
+    padding-left: 1.1rem;
+    color: var(--color-muted);
+  }
+
+  .license-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .related-card {
+    display: block;
+    padding: 1.25rem;
+    text-decoration: none;
+  }
+
+  .service-cta {
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .service-cta__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .service-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 900px) {
+    .service-hero__grid,
+    .service-content__grid,
+    .vegas-section__grid,
+    .license-section__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .proof-row__grid,
+    .related-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-cta__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .service-cta__actions {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .service-hero h1 {
+      font-size: clamp(3rem, 16vw, 4.5rem);
+    }
+
+    .proof-row__grid,
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

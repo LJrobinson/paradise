@@ -1,5 +1,5 @@
 ---
-import { services } from "../../data/services";
+import { getServicePath, services } from "../../data/services";
 ---
 
 <section id="services" class="section services">
@@ -18,7 +18,7 @@ import { services } from "../../data/services";
         <article class="service-card card">
           <h3>{service.title}</h3>
           <p>{service.shortDescription}</p>
-          <a href="#contact">{service.ctaLabel} →</a>
+          <a href={getServicePath(service.slug)}>Learn more →</a>
         </article>
       ))}
     </div>

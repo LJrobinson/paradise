@@ -9,7 +9,9 @@ const {
   description = business.description,
 } = Astro.props;
 
-const pageTitle = title === business.name ? title : `${title} | ${business.shortName}`;
+const pageTitle = title.includes(business.shortName)
+  ? title
+  : `${title} | ${business.shortName}`;
 ---
 
 <!doctype html>
