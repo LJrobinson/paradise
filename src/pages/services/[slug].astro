@@ -88,6 +88,37 @@ const servicePath = getServicePath(service.slug);
     </div>
   </section>
 
+  <section class="section service-lists">
+    <div class="container service-lists__grid">
+      <article class="detail-card card">
+        <p class="eyebrow">Highlights</p>
+        <h2>What matters for {service.title.toLowerCase()}.</h2>
+        <ul>
+          {service.highlights.map((highlight) => <li>{highlight}</li>)}
+        </ul>
+      </article>
+
+      <article class="detail-card card">
+        <p class="eyebrow">Ideal for</p>
+        <h2>Good fits for this service.</h2>
+        <ul>
+          {service.idealFor.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section service-sections">
+    <div class="container service-section-stack">
+      {service.sections.map((section) => (
+        <article class="service-section-row">
+          <h2>{section.heading}</h2>
+          <p>{section.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
   <section class="section vegas-section">
     <div class="container vegas-section__grid">
       <div>
@@ -125,6 +156,24 @@ const servicePath = getServicePath(service.slug);
             <span>License #{license.number}</span>
             <h3>{license.classification}</h3>
             <p>{license.label}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Questions</p>
+        <h2>Common questions about {service.title.toLowerCase()}.</h2>
+      </div>
+
+      <div class="faq-grid">
+        {service.faqs.map((faq) => (
+          <article class="faq-card card">
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
           </article>
         ))}
       </div>
@@ -207,14 +256,19 @@ const servicePath = getServicePath(service.slug);
 
   .service-hero__card,
   .service-area-card,
-  .license-card {
+  .license-card,
+  .detail-card,
+  .faq-card {
     padding: 1.5rem;
   }
 
   .service-hero__card h2,
   .service-content h2,
+  .service-lists h2,
+  .service-sections h2,
   .vegas-section h2,
   .license-section h2,
+  .faq-section h2,
   .related-section h2,
   .service-cta h2 {
     margin: 0;
@@ -225,8 +279,11 @@ const servicePath = getServicePath(service.slug);
 
   .service-hero__card p,
   .service-content p,
+  .service-lists li,
+  .service-sections p,
   .vegas-section p,
   .license-section p,
+  .faq-section p,
   .service-cta p {
     color: var(--color-muted);
   }
@@ -263,15 +320,53 @@ const servicePath = getServicePath(service.slug);
   }
 
   .service-area-card h3,
-  .license-card h3 {
+  .license-card h3,
+  .faq-card h3 {
     margin-top: 0;
+  }
+
+  .service-lists__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .detail-card h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .detail-card ul,
+  .service-area-card ul {
+    margin-bottom: 0;
+    padding-left: 1.1rem;
+  }
+
+  .detail-card li + li,
+  .service-area-card li + li {
+    margin-top: 0.5rem;
   }
 
   .service-area-card ul {
     columns: 2;
-    margin-bottom: 0;
-    padding-left: 1.1rem;
     color: var(--color-muted);
+  }
+
+  .service-section-stack {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .service-section-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
+
+  .service-section-row h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
   }
 
   .license-grid {
@@ -282,6 +377,12 @@ const servicePath = getServicePath(service.slug);
   .section-heading {
     max-width: 760px;
     margin-bottom: 2rem;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
   }
 
   .related-grid {
@@ -324,8 +425,14 @@ const servicePath = getServicePath(service.slug);
     }
 
     .proof-row__grid,
+    .service-lists__grid,
+    .faq-grid,
     .related-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-section-row {
+      grid-template-columns: 1fr;
     }
 
     .service-cta__inner {
@@ -344,6 +451,8 @@ const servicePath = getServicePath(service.slug);
     }
 
     .proof-row__grid,
+    .service-lists__grid,
+    .faq-grid,
     .related-grid {
       grid-template-columns: 1fr;
     }
