@@ -36,12 +36,4 @@ export const business = {
       label: "Concrete Contracting",
     },
   ],
-  services: [
-    "Patio Covers",
-    "Pavers",
-    "Concrete",
-    "Outdoor Lighting",
-    "Landscape",
-    "Outdoor Living",
-  ],
 } as const;

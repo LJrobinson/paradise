@@ -1,5 +1,5 @@
 ---
-import { business } from "../../data/business";
+import { services } from "../../data/services";
 ---
 
 <section id="services" class="section services">
@@ -14,14 +14,11 @@ import { business } from "../../data/business";
     </div>
 
     <div class="service-grid">
-      {business.services.map((service) => (
+      {services.map((service) => (
         <article class="service-card card">
-          <h3>{service}</h3>
-          <p>
-            Planning, construction, and finish work for {service.toLowerCase()}
-            projects across Southern Nevada.
-          </p>
-          <a href="#contact">Request an estimate →</a>
+          <h3>{service.title}</h3>
+          <p>{service.shortDescription}</p>
+          <a href="#contact">{service.ctaLabel} →</a>
         </article>
       ))}
     </div>
