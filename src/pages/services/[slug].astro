@@ -16,7 +16,11 @@ const phoneHref = `tel:${business.phone.replaceAll("-", "")}`;
 const emailHref = `mailto:${business.email}`;
 ---
 
-<BaseLayout title={service.seoTitle} description={service.seoDescription}>
+<BaseLayout
+  title={service.seoTitle}
+  description={service.seoDescription}
+  canonicalPath={getServicePath(service.slug)}
+>
   <section class="service-hero section">
     <div class="container service-hero__grid">
       <div>

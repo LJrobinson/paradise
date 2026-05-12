@@ -3,25 +3,30 @@ import "../styles/global.css";
 import { business } from "../data/business";
 import SiteFooter from "../components/layout/SiteFooter.astro";
 import SiteHeader from "../components/layout/SiteHeader.astro";
+import Seo from "../components/seo/Seo.astro";
 
 const {
   title = business.name,
   description = business.description,
+  canonicalPath = Astro.url.pathname,
+  image,
+  noindex = false,
 } = Astro.props;
-
-const pageTitle = title.includes(business.shortName)
-  ? title
-  : `${title} | ${business.shortName}`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <Seo
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      image={image}
+      noindex={noindex}
+    />
 
     <script is:inline>
       const storedTheme = localStorage.getItem("theme");

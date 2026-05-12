@@ -1,0 +1,42 @@
+---
+import { business } from "../../data/business";
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noindex?: boolean;
+};
+
+const {
+  title = business.name,
+  description = business.description,
+  canonicalPath = "/",
+  image,
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title.includes(business.shortName)
+  ? title
+  : `${title} | ${business.shortName}`;
+
+const siteUrl = business.url.endsWith("/") ? business.url : `${business.url}/`;
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const imageUrl = image ? new URL(image, siteUrl).toString() : undefined;
+const twitterCard = imageUrl ? "summary_large_image" : "summary";
+---
+
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta property="og:type" content="website" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+{imageUrl && <meta property="og:image" content={imageUrl} />}
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}
