@@ -1,0 +1,28 @@
+---
+type Faq = {
+  question: string;
+  answer: string;
+};
+
+type Props = {
+  faqs?: Faq[];
+};
+
+const { faqs = [] } = Astro.props;
+const hasFaqs = faqs.length > 0;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+{hasFaqs && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>}
