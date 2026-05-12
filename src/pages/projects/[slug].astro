@@ -160,7 +160,11 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
 <style>
   .project-hero {
-    padding-top: clamp(4rem, 9vw, 8rem);
+    padding-top: clamp(4.5rem, 9vw, 8.5rem);
+    padding-bottom: clamp(3.5rem, 7vw, 6.5rem);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--color-surface-soft) 62%, transparent), transparent),
+      transparent;
   }
 
   .project-hero__grid,
@@ -174,6 +178,7 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
   .back-link {
     display: inline-flex;
     margin-bottom: 1.5rem;
+    padding: 0.35rem 0;
     color: var(--color-brand-strong);
     font-size: 0.95rem;
     font-weight: 900;
@@ -182,9 +187,9 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
   .project-hero h1 {
     margin: 0;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 0.92;
-    letter-spacing: -0.07em;
+    font-size: clamp(3.3rem, 8vw, 6.75rem);
+    line-height: 0.95;
+    letter-spacing: 0;
   }
 
   .project-hero__lede {
@@ -199,7 +204,9 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
     min-height: 320px;
     overflow: hidden;
     place-items: center;
-    background: var(--color-surface-soft);
+    border-top: 5px solid var(--color-accent);
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--color-accent-soft) 75%, transparent), var(--color-surface-soft));
     color: var(--color-muted);
     font-weight: 800;
     text-align: center;
@@ -223,15 +230,18 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
   }
 
   .detail-grid div {
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+    padding: 1rem;
+    box-shadow: 0 10px 22px color-mix(in srgb, var(--color-text) 5%, transparent);
   }
 
   .detail-grid span {
     color: var(--color-brand-strong);
     font-size: 0.85rem;
     font-weight: 900;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
@@ -247,7 +257,7 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
     margin: 0;
     font-size: clamp(2rem, 4vw, 3.5rem);
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   .gallery-section p,
@@ -276,6 +286,7 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
   .highlight-card {
     padding: 1.5rem;
+    border-top: 4px solid var(--color-brand);
   }
 
   .highlight-card ul {
@@ -289,7 +300,7 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
   .story-stack {
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .story-row {
@@ -297,8 +308,8 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-border) 86%, transparent);
+    padding-block: 1.75rem;
   }
 
   .story-row h2 {
@@ -328,6 +339,7 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
   .gallery-item {
     min-height: 200px;
+    border-top-width: 0;
   }
 
   .project-cta {
@@ -340,6 +352,10 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
     justify-content: space-between;
     gap: 2rem;
     padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-top: 5px solid var(--color-accent);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--color-accent-soft) 52%, transparent), transparent),
+      color-mix(in srgb, var(--color-surface) 94%, transparent);
   }
 
   .project-cta__actions {
@@ -373,7 +389,7 @@ const galleryItems = project.gallery?.length ? project.gallery : [undefined, und
 
   @media (max-width: 620px) {
     .project-hero h1 {
-      font-size: clamp(3rem, 16vw, 4.5rem);
+      font-size: clamp(3.1rem, 15vw, 4.5rem);
     }
 
     .detail-grid,

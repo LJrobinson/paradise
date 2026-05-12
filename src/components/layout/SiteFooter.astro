@@ -37,15 +37,17 @@ import { business } from "../../data/business";
 
 <style>
   .site-footer {
-    padding-block: 4rem;
+    padding-block: clamp(3rem, 6vw, 4.75rem);
     border-top: 1px solid var(--color-border);
-    background: var(--color-surface-soft);
+    background:
+      linear-gradient(180deg, var(--color-surface-soft), color-mix(in srgb, var(--color-surface-soft) 72%, var(--color-bg))),
+      var(--color-surface-soft);
   }
 
   .site-footer__grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 2rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
   }
 
   .site-footer h2,
@@ -55,7 +57,24 @@ import { business } from "../../data/business";
   }
 
   .site-footer ul {
+    margin-bottom: 0;
     padding-left: 1.1rem;
+  }
+
+  .site-footer h2 {
+    max-width: 12ch;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+  }
+
+  .site-footer h3 {
+    color: var(--color-brand-strong);
+  }
+
+  .site-footer a {
+    font-weight: 800;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
   }
 
   @media (max-width: 820px) {

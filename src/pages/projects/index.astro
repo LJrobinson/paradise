@@ -57,7 +57,10 @@ import { getProjectPath, projects } from "../../data/projects";
 
 <style>
   .projects-hero {
-    padding-top: clamp(4rem, 9vw, 8rem);
+    padding-top: clamp(4.5rem, 9vw, 8.5rem);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--color-surface-soft) 62%, transparent), transparent),
+      transparent;
   }
 
   .projects-hero__inner {
@@ -66,9 +69,9 @@ import { getProjectPath, projects } from "../../data/projects";
 
   .projects-hero h1 {
     margin: 0;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 0.92;
-    letter-spacing: -0.07em;
+    font-size: clamp(3.3rem, 8vw, 6.75rem);
+    line-height: 0.95;
+    letter-spacing: 0;
   }
 
   .projects-hero p,
@@ -80,11 +83,12 @@ import { getProjectPath, projects } from "../../data/projects";
   .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-    gap: 1rem;
+    gap: 1.1rem;
   }
 
   .project-card {
     overflow: hidden;
+    border-top: 4px solid var(--color-accent);
   }
 
   .project-media {
@@ -92,7 +96,8 @@ import { getProjectPath, projects } from "../../data/projects";
     min-height: 220px;
     place-items: center;
     border-bottom: 1px solid var(--color-border);
-    background: var(--color-surface-soft);
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--color-accent-soft) 75%, transparent), var(--color-surface-soft));
     color: var(--color-muted);
     font-weight: 800;
     text-align: center;
@@ -112,7 +117,7 @@ import { getProjectPath, projects } from "../../data/projects";
     margin: 0;
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   .project-meta {
@@ -143,7 +148,7 @@ import { getProjectPath, projects } from "../../data/projects";
     }
 
     .projects-hero h1 {
-      font-size: clamp(3rem, 16vw, 4.5rem);
+      font-size: clamp(3.1rem, 15vw, 4.5rem);
     }
   }
 </style>

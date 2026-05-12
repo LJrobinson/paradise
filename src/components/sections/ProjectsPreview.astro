@@ -40,7 +40,7 @@ import { getProjectPath, projects } from "../../data/projects";
     margin: 0;
     font-size: clamp(2rem, 4vw, 3.5rem);
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   .section-heading p,
@@ -56,15 +56,16 @@ import { getProjectPath, projects } from "../../data/projects";
 
   .project-card {
     display: grid;
-    gap: 1rem;
+    gap: 1.25rem;
     padding: 1.5rem;
+    border-top: 4px solid var(--color-accent);
   }
 
   .project-card h3 {
     margin: 0;
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   .project-card a {
