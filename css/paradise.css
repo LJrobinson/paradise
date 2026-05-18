@@ -1,0 +1,11 @@
+/* Paradise Builders CSS 2026 */
+/*Reset CSS - CleanCSS*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+/*START Custom CSS*/
